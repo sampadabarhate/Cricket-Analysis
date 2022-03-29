@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   getLoginValues(loginInput:any={})
   {
     if(loginInput.email ==="" || loginInput.password1 === "")
