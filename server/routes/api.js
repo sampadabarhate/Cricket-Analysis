@@ -96,47 +96,45 @@ router.post("/details", (req, res) => {
 });
 
 
-router.post("/dashboard",(req,res)=>
+router.get("/dashboard",(req,res)=>
 {
-  let token = req.body
-  console.log("dashboard")
-  console.log(token)
-  res.send(token)
-  // let userid = jwt.verify(token,secret)
-  // console.log(userid)
-  // User.findOne({ _id: userid }, (err, ifuser) => {
-  //   if (err) {
-  //     console.log(error);
-  //   }
-  //   else{
-  //     console.log(ifuser)
-  //   }
-  // })
-  // Details.findOne({ Email:email }, (err, founduser) => {
-  //   if (err) {
-  //     console.log(error);
-  //   } else {
-  //     if (founduser) {
-  //           res.status(200).send(founduser);
-  //         }
-      
-  //    else {
-  //     User.findOne({ email: player.email }, (err, gotuser) => {
-  //       if (err) {
-  //         console.log(error);
-  //       } else {
-  //         if (gotuser) { 
-  //               res.status(200).send("User details Not yet Updated");
-  //             }
-  //          else {
-  //           res.status(401).send("Please register");
-  //         }
-  //       }
-  //     });
-  //     }
-  //   }
-  //   });
-  });
+if(!req.headers.authorization) {
+  return res.status(401).send("Unauthorized Request 1")
+}
+let token = req.headers.authorization.split(' ')[1]
+if(token == 'null')
+{
+  return res.status(401).send('Unauthorized Request 2')
+}
+let payload =jwt.verify(token,secret)
+if(!payload)
+{
+  return res.status(401).send('Unauthorized Request 3')
+}
+console.log(payload)
+let userid = payload.id;
+console.log(userid)
+  User.findOne({_id: userid }, (err, ifuser) => {
+    if (err) {
+      console.log(error);
+    }
+    else{
+     console.log(ifuser)
+      Details.findOne({ Email:ifuser.email }, (err, founduser) => {
+        if (err) {
+          console.log(error);
+        } else {
+          if (founduser) {
+            console.log(founduser)
+            res.send(founduser)
+              }
+         }
+       })
+      }
+    })
+  })
+
+        
 
 
 router.post("/login", (req, res) => {
@@ -151,8 +149,7 @@ router.post("/login", (req, res) => {
         if (!encrypt.compareSync(userData.password,user.password )) {
           res.status(401).send("Invalid Password");
         } else {
-          const token = jwt.sign({id:user.id},secret);
-
+          const token = jwt.sign({'id':user.id},secret);
           res.status(200).send({token})
         }
       }

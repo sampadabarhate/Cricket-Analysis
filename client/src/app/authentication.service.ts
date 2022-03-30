@@ -11,11 +11,11 @@ export class AuthenticationService {
   private loginurl = "http://localhost:3000/api/login"
   private detailsurl = "http://localhost:3000/api/dashboard"
   constructor(private http:HttpClient) { }
-  sendValue(Value:any)
-  {
-    console.log(Value,"This is from service")
-    this.loggedinUser.next(Value)
-  }
+  // sendValue(Value:any)
+  // {
+  //   console.log(Value,"This is from service")
+  //   this.loggedinUser.next(Value)
+  // }
   registerUser(user:any)
   {
     return this.http.post<any>(this.registerurl,user)
@@ -25,10 +25,9 @@ export class AuthenticationService {
     return this.http.post<any>(this.loginurl,user)
     
   }
-  details(data:any)
+  details()
   {
-    console.log(data)
-    return this.http.post<any>(this.detailsurl,data)
+    return this.http.get<any>(this.detailsurl)
   }
   loggedIn()
   {

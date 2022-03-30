@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<div *ngIf="details">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <!-- Offcanvas button-->
     <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
@@ -63,8 +64,7 @@
           <div class="container px-4">
             <div class="row">
               <div class="col-lg-6 col-sm-12">Profile Picture</div>
-              <div class="col-lg-6 col-sm-12">Name<br>Sampada<br>DOB<br>10/10/2000<br>Nationality<br>Indian<br>Total
-                Runs<br>123456</div>
+              <div class="col-lg-6 col-sm-12">Name<br><br>DOB<br>{{details.DateOfBirth}}<br>Nationality<br>{{details.Nationality}}</div>
             </div>
           </div>
         </li>
@@ -72,38 +72,38 @@
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <span class="px-4">Total 100's</span>
+          <span class="px-4">Total 100's : {{details.Total100}}</span>
         </li>
         <li class="my-1">
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <span class="px-4">Total 50's</span>
+          <span class="px-4">Total 50's : {{details.Total50}}</span>
+        </li>
+        <li class="my-1">
+          <hr class="dropdown-divider" /> 
+        </li>
+        <li>
+          <span class="px-4">Total Wickets : {{details.Totalwickets}}</span>
         </li>
         <li class="my-1">
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <span class="px-4">Total Wickets</span>
+          <span class="px-4">Out >50 : {{details.Out50}}</span>
         </li>
         <li class="my-1">
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <span class="px-4">Out >50</span>
+          <span class="px-4">Out >100 : {{details.Out100}}</span>
         </li>
         <li class="my-1">
           <hr class="dropdown-divider" />
         </li>
-        <li>
-          <span class="px-4">Out >100</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Best Score</span>
-        </li>
+        <!-- <li>
+          <span class="px-4">Best Score : </span>
+        </li> -->
       </ul>
     </nav>
   </div>
@@ -183,6 +183,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 </div>

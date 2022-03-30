@@ -7,17 +7,22 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  public details :any
   constructor(private router:Router,private auth:AuthenticationService) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('token'))
-    this.auth.value$
-    .subscribe((message)=>{
-    console.log(message,"this is from dashboard")
-    let data ={"token":message}
-    this.auth.details(data).subscribe(res=>alert("hi")
-    )
+    // this.auth.value$
+    // .subscribe((message)=>{
+    // console.log(message,"this is from dashboard")
+    // let data ={"token":message}
+    // this.auth.details(data).subscribe(res=>alert("hi")
+    // )
+  //})
+  this.auth.details().subscribe(res=>{
+    this.details = res
+    console.log(this.details)
   })
+
   }
 }
+

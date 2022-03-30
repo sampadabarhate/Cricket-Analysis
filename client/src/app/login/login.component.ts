@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       console.log(localStorage.getItem('token'))
 
       
-      this.auth.sendValue(localStorage.getItem('token'))
+      //this.auth.sendValue(localStorage.getItem('token'))
       this.router.navigate(['dashboard']);
     }
       ,err=>{console.log(err)
