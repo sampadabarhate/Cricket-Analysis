@@ -3,24 +3,35 @@
         <div class="col-10 col-md-8 col-lg-4 shadow p-3 mb-5 bg-white rounded" style="margin-top: 48px;">
     <form #signup="ngForm" (ngSubmit)="getValues(signup.value)">
         <div class="text-center fw-bolder"><h2>Sign Up</h2></div>
-        <div id="error"></div>
+        <div class="apply" *ngIf ="UserExist">User Already Exists</div>
     <div class="form-group my-2">
         <label for="exampleInputUserName"style="font-size:18px;">Name<span class="apply fw-bolder">*</span></label>
-        <input type="text" ngModel name ="username" class="form-control" id="exampleInputUserName" placeholder="Enter Name">
+       <input type="text" [(ngModel)]="resArry.username" name ="username" class="form-control" id="exampleInputUserName" placeholder="Enter Name" #Name="ngModel" required>
+      <div class="apply" *ngIf ="(Name.touched || signup.submitted) && Name.errors?.['required']">Name Required</div>
       </div>
     <div class="form-group my-2">
       <label for="exampleInputEmail1" style="font-size:18px;">Email address<span class="apply fw-bolder">*</span></label>
-      <input type="email" ngModel name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+      <input type="email" [(ngModel)]="resArry.email" name ="email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email" #Email="ngModel" required>
+    <div class="apply" *ngIf="(Email.touched || signup.submitted) && Email.errors?.['required']">Email Required</div>
+    <div class="apply" *ngIf="(Email.touched || signup.submitted) && Email.errors?.['pattern']">Enter Valid Email</div>
     </div>
     <div class="form-group my-2">
       <label for="exampleInputPassword1" style="font-size:18px;">Password <span class="apply fw-bolder">*</span></label>
-      <input type="password" ngModel name="password1" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password"  [(ngModel)]="resArry.password1" name="password1" class="form-control" id="exampleInputPassword1" placeholder="Password" #Password1="ngModel" required>
+      <div class="apply" *ngIf="(Password1.touched || signup.submitted) && Password1.errors?.['required']">Password Required</div>
     </div>
     <div class="form-group my-2">
         <label for="exampleInputPassword2" style="font-size:18px;">Confirm Password<span class="apply fw-bolder">*</span></label>
-        <input type="password"  ngModel  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary my-2">Register</button>
+        <input type="password"  [(ngModel)]="resArry.password2"  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password" #Password2="ngModel" required>
+        <div class="apply" *ngIf="(Password2.touched || signup.submitted) && Password2.errors?.['required']">Confirm Password Required</div>
+         <div class="apply" *ngIf="(resArry.password2 !== resArry.password1)">Password Not Matching</div>
+      </div>
+    <div class="form-group my-2">
+      <label for="exampleProfile" style="font-size:18px;">Upload Image<span class="apply fw-bolder">*</span></label>
+      <input type="file" #Image accept = "image/*" [(ngModel)]="resArry.upload"  name="upload" class="form-control" id="exampleProfile" placeholder="" #Upload="ngModel" required>
+      <div class ="apply" *ngIf="(Upload.touched || signup.submitted) && Upload.errors?.['required']">Please Upload Image</div>
+  </div>
+    <button type="submit" [disabled] ="!signup.form.valid" class="btn btn-primary my-2">Register</button>
     <a routerLink="/login" class="mx-3" style="text-decoration:none">Already registered?</a>
   </form>
  </div>

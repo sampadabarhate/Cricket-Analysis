@@ -7,7 +7,8 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  logArry :any=[]
+  passed : boolean = false
   constructor(private router:Router,private auth:AuthenticationService) { }
 
   ngOnInit(): void {
@@ -15,15 +16,13 @@ export class LoginComponent implements OnInit {
   
   getLoginValues(loginInput:any={})
   {
-    if(loginInput.email ==="" || loginInput.password1 === "")
-    {
-      alert("No Empty fields Allowed");
-    }
-    else
-    {
+   
+  
       const logindata : any = {"email":loginInput.email,"password":loginInput.password1}
       this.auth.loginUser(logindata).subscribe(res=>{
       localStorage.setItem('token',res.token) 
+      localStorage.setItem('expiryTime',res.expiryTime)
+
       console.log(localStorage.getItem('token'))
 
       
@@ -33,11 +32,11 @@ export class LoginComponent implements OnInit {
       ,err=>{console.log(err)
       if(err.status === 401)
       {
-        alert("Inavlid Credentials")
+        this.passed=true
       }
       
       })
-    }
+    
   }
 
 }
