@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 const detailsSchema = new schema({
     Email:String,
+    Name:String,
+    Image:String,
     DateOfBirth:String,
     Nationality:String,
     TotalMatch:Number,
@@ -11,7 +13,7 @@ const detailsSchema = new schema({
     Totalwickets:Number,
     Out50:Number,
     Out100:Number,
-    BestScore:Number
+    BestScore:Number,
     
 })
 const Details = mongoose.model("details",detailsSchema,"Details");

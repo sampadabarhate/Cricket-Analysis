@@ -1,188 +1,199 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <!-- Offcanvas button-->
-    <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-      aria-controls="offcanvasExample">
-      <span class="navbar-toggler-icon" data-bs-target="#offcanvasExample"></span>
-    </button>
-    <a class="navbar-brand fw-bold text-uppercase me-auto" href="#">Cricket Analysis</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Offcanvas button -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex ms-auto">
-        <div class="input-group my-3 my-lg-0">
-          <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
-          <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+<div *ngIf="details">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <!-- Offcanvas button-->
+      <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample">
+        <span class="navbar-toggler-icon" data-bs-target="#offcanvasExample"></span>
+      </button>
+      <a class="navbar-brand fw-bold text-uppercase me-auto" href="#">Cricket Analysis</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Offcanvas button -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex ms-auto">
+          <div class="input-group my-3 my-lg-0">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username"
+              aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-person-fill"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end bg-dark" aria-labelledby="navbarDropdown">
+              <li class="dropdown-item bg-dark"><button class="btn btn-dark" (click)="logout()">Logout</button></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Offcanvas -->
+  <div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-body p-0">
+      <nav class="navbar-dark">
+        <ul class="navbar-nav">
+          <li>
+            <div class="text-muted small fw-bold px-3">
+              Analysis
+            </div>
+          </li>
+          <li>
+            <div class="container px-4">
+              <div class="row">
+                <div class="col-lg-6 col-sm-12 my-4"><img style="width:110px;height:120px" class="rounded-circle"
+                    src="/assets/player.jpg" alt="image"></div>
+                <div class="col-lg-6 col-sm-12"><span class="fw-bold">Name</span><br><span
+                    class="text-muted fw-bold">{{details.Name}}</span><br><span class="fw-bold">DOB</span><br><span
+                    class="text-muted fw-bold">{{details.DateOfBirth}}</span><br><span
+                    class="fw-bold">Nationality</span><br><span
+                    class="text-muted fw-bold">{{details.Nationality}}</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Total 100's : </span>
+              <span class="text-muted fw-bold">{{details.Total100}}</span></span>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Total 50's : </span><span
+                class="text-muted fw-bold">{{details.Total50}}</span></span>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Total Wickets : </span>
+              <span class="text-muted fw-bold">{{details.Totalwickets}}</span></span>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Out > 50 : </span><span
+                class="text-muted fw-bold">{{details.Out50}}</span></span>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Out > 100 : </span>
+              <span class="text-muted fw-bold">{{details.Out100}}</span></span>
+          </li>
+          <li class="my-1">
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span class="px-4"><span class="fw-bold">Best Score : </span><span
+                class="text-muted fw-bold">{{details.BestScore}}</span></span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <main class="mt-5 pt-3 px-3">
+    <app-charts></app-charts>
+  </main>
+
+  <div *ngIf="ifcalendar" class="cricket mt-2 pt-3 ">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 d-flex justify-content-center my-1">
+          <div class="card text-dark bg-light mb-3 shadow-lg rounded" style="width: 18rem;">
+            <div class="card-header fw-bold fs-5"><i class="bi bi-calendar-event px-3 "></i>Upcoming Events</div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="card-body mt-3">
+                <div class="carousel-inner px-3">
+                  <div class="carousel-item active text-center">
+                    <h6 class="card-text">{{calendar[0].Match}}</h6>
+                    <p class="card-text">Date: {{calendar[0].Date | date}}<br>Time: {{calendar[0].Time}}<br>Venue:
+                      {{calendar[0].Venue}}</p>
+                  </div>
+                  <div class="carousel-item text-center">
+                    <h6 class="card-text">{{calendar[1].Match}}</h6>
+                    <p class="card-text">Date: {{calendar[1].Date |date}}<br>Time: {{calendar[1].Time}}<br>Venue:
+                      {{calendar[1].Venue}}</p>
+                  </div>
+                  <div class="carousel-item text-center">
+                    <h6 class="card-text">{{calendar[2].Match}}</h6>
+                    <p class="card-text">Date: {{calendar[2].Date | date}}<br>Time: {{calendar[2].Time}}<br>Venue:
+                      {{calendar[2].Venue}}</p>
+                  </div>
+                  <div class="carousel-item text-center">
+                    <h6 class="card-text">{{calendar[3].Match}}</h6>
+                    <p class="card-text">Date: {{calendar[3].Date |date}}<br>Time: {{calendar[3].Time}}<br>Venue:
+                      {{calendar[3].Venue}}</p>
+                  </div>
+                  <div class="carousel-item text-center">
+                    <h6 class="card-text">{{calendar[4].Match}}</h6>
+                    <p class="card-text">Date: {{calendar[4].Date | date}}<br>Time: {{calendar[4].Time}}<br>Venue:
+                      {{calendar[4].Venue}}</p>
+                  </div>
+
+                </div>
+                <a class="left carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only"></span>
+                </a>
+                <a class="right carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only"></span>
+                </a>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+          </div>
         </div>
-      </form>
-      <ul class="navbar-nav mb-2 mb-lg-0">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <i class="bi bi-person-fill"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-<!-- Offcanvas -->
-<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
-  aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-body p-0">
-    <nav class="navbar-dark">
-      <ul class="navbar-nav">
-        <li>
-          <div class="text-muted small fw-bold px-3">
-            Analysis
+        <div class="col-md-4 d-flex justify-content-center my-1">
+          <div class="card text-dark bg-light mb-3 shadow-lg rounded" style="width: 18rem;height: 13rem;">
+            <div class="card-header fw-bold fs-5"><i class="bi bi-bar-chart-line-fill px-3 "></i>Statistics</div>
+             <app-statschart></app-statschart>
           </div>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-3 active">
-            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <div class="container px-4">
-            <div class="row">
-              <div class="col-lg-6 col-sm-12">Profile Picture</div>
-              <div class="col-lg-6 col-sm-12">Name<br>Sampada<br>DOB<br>10/10/2000<br>Nationality<br>Indian<br>Total
-                Runs<br>123456</div>
+        </div>
+        <div *ngIf="ifbowling" class="col-md-4 d-flex justify-content-center my-1">
+          <div class="card text-dark bg-light mb-3 shadow-lg rounded" style="width: 18rem;">
+            <div class="card-header fw-bold fs-5"><i class="bi bi-card-text px-3"></i>Bowling Details</div>
+            <div class="card-body">
+              <p class="card-text">
+                  <span class="fw-bold">Total Wickets : </span><span class="fs-6">{{bowlingdetail.TotalWickets}}</span><br>
+                  <span class="fw-bold">Bowling : </span><span class="fs-6">{{bowlingdetail.TypeOfBowling}}</span><br>
+                  <span class="fw-bold">Bowling Average : </span><span class="fs-6">{{bowlingdetail.BowlingAverage}}</span><br>
+                  <span class="fw-bold">Strike Rate : </span><span class="fs-6">{{bowlingdetail.StrikeRate}}</span><br>
+                  <span class="fw-bold">Economy Rate : </span><span class="fs-6">{{bowlingdetail.EconomyRate}}</span><br>
+              </p>
             </div>
           </div>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Total 100's</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Total 50's</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Total Wickets</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Out >50</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Out >100</span>
-        </li>
-        <li class="my-1">
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <span class="px-4">Best Score</span>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
-
- <main class="mt-5 pt-3">
-<div class="container-fluid">
-  <div class="row">
-    <span class="fw-bold fs-3">Performance </span>
-      <div class="col-lg-12 sm-4 mt-3">
-        <button class="badge rounded-pill bg-light text-dark px-2 py-1 mx-1" style="float:right">T-20</button>
-        <button class="badge rounded-pill bg-light text-dark px-2 py-1 mx-1" style="float:right">One Day</button>
-        <button class="badge rounded-pill bg-light text-dark px-2 py-1 mx-1" style="float:right">Test</button>
-      </div>
-  </div>
-</div>
-</main>
- 
-<div class="cricket mt-5 pt-3 ">
-  <div class="container-fluid">
-  <div class="row">
-  <div class="col-md-4 d-flex justify-content-center my-1">
-    <div class="card text-dark bg-light mb-3 shadow-lg rounded" style="width: 18rem">
-      <div class="card-header fw-bold fs-5"><i class="bi bi-calendar-event px-3 "></i>Upcoming Events</div>
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="card-body">
-          <div class="carousel-inner px-3">
-            <div class="carousel-item active text-center">
-              <h6 class="card-text">IND vs PAK</h6>
-              <p class="card-text">Time:12.00 PM IST<br>Venue:Mohli</p>
-            </div>
-            <div class="carousel-item text-center">
-              <h6 class="card-text">SRI vs PAK</h6>
-              <p class="card-text">Time:12.00 PM IST<br>Venue:Mohli</p>
-            </div>
-            <div class="carousel-item text-center">
-              <h6 class="card-text">AUS vs PAK</h6>
-              <p class="card-text">Time:12.00 PM IST<br>Venue:Mohli</p>
-            </div>
-          </div>
-          <a class="left carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
-          <a class="right carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
-        </div> 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    
-    </div>
-  </div>
-   <div class="col-md-4 d-flex justify-content-center my-1">
-    <div class="card text-dark bg-light mb-3 shadow-lg rounded " style="width: 18rem;">
-      <div class="card-header fw-bold fs-5"><i class="bi bi-bar-chart-line-fill px-3 "></i>Statistics</div>
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text"></p>
-      </div>
-    </div>
-  </div> 
-  <div class="col-md-4 d-flex justify-content-center my-1">
-    <div class="card text-dark bg-light mb-3 shadow-lg rounded" style="width: 18rem;">
-      <div class="card-header fw-bold fs-5"><i class="bi bi-card-text px-3"></i>Bowling Details</div>
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text"></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
